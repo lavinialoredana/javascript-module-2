@@ -30,36 +30,72 @@ In addition will substract 1 in the product stock of bought products
 var products = [];
 
 var product1 = {
-  id: 1,
-  name: "Toaster X56 Plus",
-  price: 12.98,
-  stock: 105
+    id: 1,
+    name: "Toaster X56 Plus",
+    price: 12.98,
+    stock: 105,
 };
 var product2 = {
-  id: 2,
-  name: "Watch Rocker",
-  price: 9.99,
-  stock: 2
+    id: 2,
+    name: "Watch Rocker",
+    price: 9.99,
+    stock: 2,
+};
+
+var product3 = {
+    id: 3,
+    name: "Holly Molly Beer",
+    price: 2.2,
+    stock: 5,
+};
+
+var product4 = {
+    id: 4,
+    name: "Virgin Mary",
+    price: 12.99,
+    stock: 0,
 };
 
 products.push(product1);
 products.push(product2);
+products.push(product3);
+products.push(product4);
 
 var shoppingCart = {
-  totalPrice: 0,
-  selectedProducts: []
+    totalPrice: 0,
+    selectedProducts: [],
 };
 
-function addToShoppingCart(id){
-
+function addToShoppingCart(id) {
+    products.forEach((product) => {
+        if (product.id === id) {
+            if (product.stock > 0) {
+                shoppingCart.selectedProducts.push(product);
+                shoppingCart.totalPrice += product.price;
+            } else {
+                console.log(" Not enough stock for", product.name);
+            }
+        }
+    });
 }
 
-function removeFromShoppingCart(id){
-
+function removeFromShoppingCart(id) {
+    shoppingCart.selectedProducts.forEach((product, index) => {
+        if (product.id === id) {
+            shoppingCart.selectedProducts.splice(index, 1);
+            shoppingCart.totalPrice -= product.price;
+        }
+    });
 }
 
-function shop(){
-
+function shop() {
+    products.forEach((productInStock) => {
+        shoppingCart.selectedProducts.forEach((shoppingCartProduct) => {
+            if (shoppingCartProduct.id === productInStock.id) productInStock.stock -= 1;
+        });
+    });
+    shoppingCart.selectedProducts = [];
+    shoppingCart.totalPrice = 0;
 }
 
 //results
@@ -67,24 +103,25 @@ addToShoppingCart(1);
 console.log("Step 1");
 console.log("Total Price = " + shoppingCart.totalPrice);
 console.log("Number of Elements = " + shoppingCart.selectedProducts.length);
-console.log("Name of Elements = " + shoppingCart.selectedProducts.map(p=>p.name));
+console.log("Name of Elements = " + shoppingCart.selectedProducts.map((p) => p.name));
 addToShoppingCart(2);
 console.log("Step 2");
 console.log("Total Price = " + shoppingCart.totalPrice);
 console.log("Number of Elements = " + shoppingCart.selectedProducts.length);
-console.log("Name of Elements = " + shoppingCart.selectedProducts.map(p=>p.name));
+console.log("Name of Elements = " + shoppingCart.selectedProducts.map((p) => p.name));
 addToShoppingCart(4);
 console.log("Step 3");
 console.log("Total Price = " + shoppingCart.totalPrice);
 console.log("Number of Elements = " + shoppingCart.selectedProducts.length);
-console.log("Name of Elements = " + shoppingCart.selectedProducts.map(p=>p.name));
+console.log("Name of Elements = " + shoppingCart.selectedProducts.map((p) => p.name));
 removeFromShoppingCart(2);
 console.log("Step 4");
 console.log("Total Price = " + shoppingCart.totalPrice);
 console.log("Number of Elements = " + shoppingCart.selectedProducts.length);
-console.log("Name of Elements = " + shoppingCart.selectedProducts.map(p=>p.name));
+console.log("Name of Elements = " + shoppingCart.selectedProducts.map((p) => p.name));
 shop();
 console.log("Step 5");
 console.log("Total Price = " + shoppingCart.totalPrice);
 console.log("Number of Elements = " + shoppingCart.selectedProducts.length);
-console.log("Name of Elements = " + shoppingCart.selectedProducts.map(p=>p.name));
+console.log("Name of Elements = " + shoppingCart.selectedProducts.map((p) => p.name));
+console.log("my products", products);
