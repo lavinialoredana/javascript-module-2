@@ -11,43 +11,49 @@ only if the inserted amount is greater or equal than the price of the coffee!
 let coffeeMachine = {
     brand: "Super Coffee",
     prices: {
-      cappuccino: 2.4,
-      blackCoffee: 1.5,
-      flatWhite: 3.0,
+        cappuccino: 2.4,
+        blackCoffee: 1.5,
+        flatWhite: 3.0,
     },
     insertedAmount: 0,
-    insertMoney: function (amount) {},
-    getCoffee: function (coffee) {},
-  };
-  
-  /*
+    insertMoney: function (amount) {
+        insertedAmount = amount;
+    },
+    getCoffee: function (coffee) {
+        if (insertedAmount >= coffeeMachine.prices[coffee])
+            return `Please take your ${coffee}`;
+        return `Sorry you don't have enough money for a ${coffee}`;
+    },
+};
+
+/*
   DO NOT EDIT ANYTHING BELOW THIS LINE
   */
-  
-  coffeeMachine.insertMoney(2.4);
-  console.log(
+
+coffeeMachine.insertMoney(2.4);
+console.log(
     `Expected result: 'Please take your cappuccino'. Actual result: ${coffeeMachine.getCoffee(
-      "cappuccino"
+        "cappuccino"
     )}`
-  );
-  
-  coffeeMachine.insertMoney(1.5);
-  console.log(
+);
+
+coffeeMachine.insertMoney(1.5);
+console.log(
     `Expected result: 'Please take your blackCoffee'. Actual result: ${coffeeMachine.getCoffee(
-      "blackCoffee"
+        "blackCoffee"
     )}`
-  );
-  
-  coffeeMachine.insertMoney(4.0);
-  console.log(
+);
+
+coffeeMachine.insertMoney(4.0);
+console.log(
     `Expected result: 'Please take your flatWhite'. Actual result: ${coffeeMachine.getCoffee(
-      "flatWhite"
+        "flatWhite"
     )}`
-  );
-  
-  coffeeMachine.insertMoney(2.4);
-  console.log(
+);
+
+coffeeMachine.insertMoney(2.4);
+console.log(
     `Expected result: 'Sorry you don't have enough money for a flatWhite'. Actual result: ${coffeeMachine.getCoffee(
-      "flatWhite"
+        "flatWhite"
     )}`
-  );
+);
